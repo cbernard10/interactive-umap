@@ -280,68 +280,6 @@ function RealGraph(graph){
         }
     }
 
-    // this.computeFuzzySimplices = () => {
-
-    //     this.graph.triangles = new Set()
-    //     this.graph.edges = new Set()
-
-    //     for(vi of Object.keys(this.graph.vertices)){
-    //         for(vj_id of Object.keys(this.graph.vertices[vi].neighbors)){
-    //             const vj = this.graph.vertices[vi].neighbors[vj_id].xi
-
-    //             if(vi===vj) continue
-
-    //             const xi = this.graph.vertices[vi].x
-    //             const yi = this.graph.vertices[vi].y
-    //             const xj = this.graph.vertices[vj].x
-    //             const yj = this.graph.vertices[vj].y
-    //             const ri = this.graph.vertices[vi].neighbors[this.graph.vertices[vi].neighbors.length-1].d*this.fuzzyTolerance
-    //             const rj = this.graph.vertices[vj].neighbors[this.graph.vertices[vj].neighbors.length-1].d*this.fuzzyTolerance
-
-    //             const d_ij = this.euclDist(xi, yi, xj, yj) 
-                
-    //             if(this.check_two_circles_overlap(xi, yi, ri, xj, yj, rj)){
-                    
-    //                 this.graph.linkVertices(vi,vj,1 - (1-d_ij/ri)*(1-d_ij/rj))
-
-    //             }
-    //         }
-    //     }
-
-    //     for(vi of Object.keys(this.graph.vertices)){
-    //         for(vj_id of Object.keys(this.graph.vertices[vi].neighbors)){
-    //             const vj = this.graph.vertices[vi].neighbors[vj_id].xi
-    //             for(vk_id of Object.keys(this.graph.vertices[vi].neighbors)){
-    //                 const vk = this.graph.vertices[vi].neighbors[vk_id].xi
-    //                 if(vk===vi || vk===vj) continue
-
-    //                 const xi = this.graph.vertices[vi].x
-    //                 const yi = this.graph.vertices[vi].y
-    //                 const xj = this.graph.vertices[vj].x
-    //                 const yj = this.graph.vertices[vj].y
-    //                 const xk = this.graph.vertices[vk].x
-    //                 const yk = this.graph.vertices[vk].y
-    //                 const rhoi = this.graph.vertices[vi].neighbors[0].d
-    //                 const rhoj = this.graph.vertices[vj].neighbors[0].d
-    //                 const rhok = this.graph.vertices[vk].neighbors[0].d
-                    
-    //                 const ri = this.graph.vertices[vi].neighbors[this.graph.vertices[vi].neighbors.length-1].d*this.fuzzyTolerance
-    //                 const rj = this.graph.vertices[vj].neighbors[this.graph.vertices[vj].neighbors.length-1].d*this.fuzzyTolerance
-    //                 const rk = this.graph.vertices[vk].neighbors[this.graph.vertices[vk].neighbors.length-1].d*this.fuzzyTolerance
-                
-    //                 if(this.check_three_circles_overlap(xi, yi, ri, xj, yj, rj, xk, yk, rk)){
-        
-    //                     const w_ij = this.graph.getEdgeWeight(vi, vj)
-    //                     const w_ik = this.graph.getEdgeWeight(vi, vk)
-    //                     const w_jk = this.graph.getEdgeWeight(vj, vk)
-                        
-    //                     if(w_ij && w_ik && w_jk) this.graph.triangulateVertices(vi, vj, vk, 0.5*(1-(1-w_ij)*(1-w_ik)*(1-w_jk)))
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
     this.computeFuzzySimplices = () => {
 
         this.graph.edges = new Set()
@@ -395,15 +333,11 @@ function RealGraph(graph){
 
                             const w_ij = neighbors_i[vj_id].weight ?? 0
                             const w_ik = neighbors_i[vk_id].weight ?? 0
-                            // const w_jk = neighbors_j[vk_id].weight ?? 0
 
                             const w_ji = neighbors_j.filter(n => n.xi == vi)[0]?.weight ?? 0
                             const w_ki = neighbors_k.filter(n => n.xi == vi)[0]?.weight ?? 0
-                            // const w_kj = neighbors_k.filter(n => n.xi == vj)[0]?.weight ?? 0
 
                             const w = 1-(1-(1-w_ij)*(1-w_ji))*(1-(1-w_ik)*(1-w_ki))
-                            // const w = 1-(1-(1-w_ij)*(1-w_ji))*(1-(1-w_ik)*(1-w_ki))
-                            // const w = 1-(1-w_ij)*(1-w_ji)*(1-w_ik)*(1-w_ki)
                             this.graph.triangulateVertices(vi, vj, vk, w)
                         }
                     }

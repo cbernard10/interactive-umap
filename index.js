@@ -138,8 +138,13 @@ window.addEventListener("keydown", (e) => {
   }
 
   if (e.code === "KeyH") {
-    TOGGLE_FUZZY_BALLS = !TOGGLE_FUZZY_BALLS
-    TOGGLE_FUZZY_SIMPLICES = !TOGGLE_FUZZY_SIMPLICES
+    if (!TOGGLE_FUZZY_BALLS || !TOGGLE_FUZZY_SIMPLICES) {
+      TOGGLE_FUZZY_BALLS = true;
+      TOGGLE_FUZZY_SIMPLICES = true;
+    } else {
+      TOGGLE_FUZZY_BALLS = !TOGGLE_FUZZY_BALLS;
+      TOGGLE_FUZZY_SIMPLICES = !TOGGLE_FUZZY_SIMPLICES;
+    }
   }
 
   if (e.code === "KeyR") {
@@ -157,7 +162,7 @@ window.addEventListener("keydown", (e) => {
   if (e.code === "KeyD") {
     MODE = 4;
   }
-  if (e.code === 'KeyA') {
+  if (e.code === "KeyA") {
     MODE = 0;
   }
 
@@ -222,11 +227,6 @@ function loop() {
     );
     l.draw();
   }
-
-  // if(MODE === 4 && SELECTED_TRIANGLE.v1 != null && SELECTED_TRIANGLE.v1 != undefined){
-  //     let l = new Line(realGraph.graph.vertices[SELECTED.from].x, realGraph.graph.vertices[SELECTED.from].y, MOUSE.x, MOUSE.y)
-  //     l.draw()
-  // }
 
   realGraph.drawVertices();
   if (TOGGLE_INFO) {
