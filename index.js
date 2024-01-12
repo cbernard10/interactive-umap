@@ -138,7 +138,7 @@ window.addEventListener("keydown", (e) => {
   }
 
   if (e.code === "KeyH") {
-    if (!TOGGLE_FUZZY_BALLS || !TOGGLE_FUZZY_SIMPLICES) {
+    if (TOGGLE_FUZZY_BALLS != TOGGLE_FUZZY_SIMPLICES) {
       TOGGLE_FUZZY_BALLS = true;
       TOGGLE_FUZZY_SIMPLICES = true;
     } else {
@@ -191,18 +191,6 @@ function loop() {
   c.fillRect(0, 0, canvas.width, canvas.height);
   realGraph.restoreVisuals();
 
-  if ((cont = realGraph.contains(MOUSE.x, MOUSE.y))) {
-    realGraph.graph.vertices[cont].color = selectedColor;
-    realGraph.graph.vertices[cont].r = realGraph.vertexRadius * 1.2;
-    if (TOGGLE_INFO) {
-      c.font = "30px Helvetica";
-      c.fillStyle = "black";
-      realGraph.graph.vertices[cont].neighbors.map((n, i) =>
-        c.fillText(JSON.stringify(n), 10, canvas.height - (40 + 40 * i))
-      );
-    }
-  }
-
   if (TOGGLE_FUZZY_BALLS) {
     realGraph.drawFuzzyBalls();
     c.font = "30px Helvetica";
@@ -229,6 +217,18 @@ function loop() {
   }
 
   realGraph.drawVertices();
+
+  c.font = "30px Helvetica";
+  c.fillStyle = "black";
+  c.fillText(
+    ["0S", "1S", "2S", "M", "D", "DRAW FUZZY BALLS", "DRAW FUZZY EDGES"][MODE],
+    10,
+    50
+  );
+  c.font = "30px Helvetica";
+  c.fillStyle = "black";
+  c.fillText(`${N_NEIGHBORS}NN`, 10, 90);
+  
   if (TOGGLE_INFO) {
     c.font = "10px Helvetica";
     c.fillStyle = "black";
@@ -245,16 +245,17 @@ function loop() {
     );
   }
 
-  c.font = "30px Helvetica";
-  c.fillStyle = "black";
-  c.fillText(
-    ["0S", "1S", "2S", "M", "D", "DRAW FUZZY BALLS", "DRAW FUZZY EDGES"][MODE],
-    10,
-    50
-  );
-  c.font = "30px Helvetica";
-  c.fillStyle = "black";
-  c.fillText(`${N_NEIGHBORS}NN`, 10, 90);
+  if ((cont = realGraph.contains(MOUSE.x, MOUSE.y))) {
+    realGraph.graph.vertices[cont].color = selectedColor;
+    realGraph.graph.vertices[cont].r = realGraph.vertexRadius * 1.2;
+    if (TOGGLE_INFO) {
+      c.font = "30px Helvetica";
+      c.fillStyle = "black";
+      realGraph.graph.vertices[cont].neighbors.map((n, i) =>
+        c.fillText(JSON.stringify(n), 10, canvas.height - (40 + 40 * i))
+      );
+    }
+  }
 
   cursor.draw();
   cursor.update(MOUSE.x, MOUSE.y, CURSOR_COLORS[MODE]);
