@@ -4,7 +4,7 @@ UMAP visualizer with random data
 
 [https://umap-learn.readthedocs.io/en/latest/how_umap_works.html](https://umap-learn.readthedocs.io/en/latest/how_umap_works.html)
 
-**[a]** add a vertex
+**[a]/[q]** add a vertex
 
 **[g]** grab a vertex
 
