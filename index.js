@@ -221,7 +221,7 @@ function loop() {
   c.font = "30px Helvetica";
   c.fillStyle = "black";
   c.fillText(
-    ["0S", "1S", "2S", "M", "D", "DRAW FUZZY BALLS", "DRAW FUZZY EDGES"][MODE],
+    ["DRAW VERTEX", "1S", "2S", "GRAB", "DELETE VERTEX", "DRAW FUZZY BALLS", "DRAW FUZZY EDGES"][MODE],
     10,
     50
   );
