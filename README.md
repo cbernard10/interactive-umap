@@ -1,8 +1,14 @@
-[https://interactive-umap.vercel.app/](https://interactive-umap.vercel.app/)
 
-UMAP visualizer with random data
+UMAP visualizer with random data.
 
-[https://umap-learn.readthedocs.io/en/latest/how_umap_works.html](https://umap-learn.readthedocs.io/en/latest/how_umap_works.html)
+[What is UMAP?](https://umap-learn.readthedocs.io/en/latest/how_umap_works.html)
+
+[Live App](https://interactive-umap.vercel.app/)
+
+
+---
+
+### Controls
 
 **[a]/[q]** add a vertex
 
