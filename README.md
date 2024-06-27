@@ -5,6 +5,10 @@ UMAP visualizer with random data.
 
 [Live App](https://interactive-umap.vercel.app/)
 
+---
+
+![2024-06-27-170029_1867x1269_escrotum](https://github.com/cbernard10/interactive-umap/assets/112329508/20a6ba41-bb02-4187-93e6-8d483cf88097)
+
 
 ---
 
